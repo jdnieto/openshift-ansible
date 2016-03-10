@@ -395,6 +395,23 @@ def set_metrics_facts_if_unset(facts):
             facts['common']['use_cluster_metrics'] = use_cluster_metrics
     return facts
 
+def set_openshift_metrics_facts_if_unset(facts):
+    """ Set openshift metrics facts if not already present in facts dict
+            dict: the facts dict updated with the generated openshift metrics facts if
+            missing
+        Args:
+            facts (dict): existing facts
+        Returns:
+            dict: the facts dict updated with the generated openshift metrics
+            facts if they were not already present
+
+    """
+    if 'common' in facts:
+        if 'use_cluster_metrics_hawkular' not in facts['common']:
+            use_cluster_metrics_hawkular = False
+            facts['common']['use_cluster_metrics_hawkular'] = use_cluster_metrics_hawkular
+    return facts
+
 def set_project_cfg_facts_if_unset(facts):
     """ Set Project Configuration facts if not already present in facts dict
             dict:
@@ -1271,6 +1288,7 @@ class OpenShiftFacts(object):
         facts = set_node_schedulability(facts)
         facts = set_master_selectors(facts)
         facts = set_metrics_facts_if_unset(facts)
+        facts = set_openshift_metrics_facts_if_unset(facts)
         facts = set_identity_providers_if_unset(facts)
         facts = set_sdn_facts_if_unset(facts, self.system_facts)
         facts = set_deployment_facts_if_unset(facts)
