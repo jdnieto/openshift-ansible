@@ -29,12 +29,12 @@
   command: >
     {{ openshift.common.admin_binary }} {{item}}
     --config={{hawkular_tmp_conf}}
-  with_items: "{{hawkular_tasks}}"
+  with_items: "{{hawkular_permission_oc_commands}}"
   register: hawkular_perm_task
   failed_when: "'already exists' not in hawkular_perm_task.stderr and hawkular_perm_task.rc != 0"
   changed_when: hawkular_perm_task.rc == 0
 
-- name: Create Heapster Services
+- name: Create Heapster and Hawkular/Cassandra Services
   shell: >
    {{ openshift.common.client_binary }} process -f \
    /usr/share/openshift/examples/infrastructure-templates/{{ hawkular_type }}/metrics-deployer.yaml -v \
