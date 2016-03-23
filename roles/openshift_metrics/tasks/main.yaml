@@ -34,11 +34,16 @@
   failed_when: "'already exists' not in hawkular_perm_task.stderr and hawkular_perm_task.rc != 0"
   changed_when: hawkular_perm_task.rc == 0
 
+- name: Check openshift_master_default_subdomain
+  fail: 
+    msg: "Default subdomain should be defined"
+  when: openshift.master.default_subdomain is not defined
+
 - name: Create Heapster and Hawkular/Cassandra Services
   shell: >
    {{ openshift.common.client_binary }} process -f \
    /usr/share/openshift/examples/infrastructure-templates/{{ hawkular_type }}/metrics-deployer.yaml -v \
-    HAWKULAR_METRICS_HOSTNAME={{ hawkular_hostname }},USE_PERSISTENT_STORAGE=false | \
+    HAWKULAR_METRICS_HOSTNAME=hawkular-metrics.{{ openshift.master.default_subdomain }},USE_PERSISTENT_STORAGE=false | \
     {{ openshift.common.client_binary }} create -n openshift-infra -f - 
   register: oex_heapster_services
   failed_when: "'already exists' not in oex_heapster_services.stderr and oex_heapster_services.rc != 0"

@@ -37,6 +37,10 @@
       use_openshift_metrics: "{{ lookup('oo_option', 'use_openshift_metrics') | default(false, true) }}"
     when: use_openshift_metrics is not defined
 
+  - set_fact:
+      openshift_master_default_subdomain: "{{ lookup('oo_option', 'openshift_master_default_subdomain') | default(None) }}"
+    when: openshift_master_default_subdomain is not defined
+    
   roles:
   - openshift_facts
   post_tasks:
