@@ -13,6 +13,7 @@ deployer_service_account:
 
 hawkular_tmp_conf: /tmp/hawkular_admin.kubeconfig
 
+hawkular_persistence: "{% if openshift.hosted.metrics.storage.kind != None %}true{% else %}false{% endif %}"
 
 hawkular_type: "{{ 'origin' if deployment_type == 'origin' else 'enterprise' }}"
 
