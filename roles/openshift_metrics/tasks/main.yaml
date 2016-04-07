@@ -1,5 +1,8 @@
 ---
 - name: Calling openshift_facts
+  roles:
+  - role: openshift_facts
+  tasks:
   - openshift_facts:
     role: hosted
 
