@@ -36,6 +36,9 @@
   - set_fact:
       openshift_master_default_subdomain: "{{ lookup('oo_option', 'openshift_master_default_subdomain') | default(None) }}"
     when: openshift_master_default_subdomain is not defined
+  - set_fact:
+      openshift_hosted_metrics_deploy: "{{ lookup('oo_option', 'openshift_hosted_metrics_deploy') | default(false, true) }}"
+    when: openshift_hosted_metrics_deploy is not defined
     
   roles:
   - openshift_facts
@@ -73,11 +76,6 @@
       openshift_env:
         openshift_hosted_registry_storage_kind: 'nfs'
     when: openshift_hosted_registry_storage_kind is not defined and groups.oo_nfs_to_config is defined and groups.oo_nfs_to_config | length > 0
-  - openshift_facts:
-      role: hosted
-      openshift_env:
-        openshift_hosted_metrics_deploy: "{{ lookup('oo_option', 'openshift_hosted_metrics_deploy') | default(false, true) }}"
-    when: openshift_hosted_metrics_deploy is not defined
   - name: Check status of external etcd certificatees
     stat:
       path: "{{ openshift.common.config_base }}/master/{{ item }}"
