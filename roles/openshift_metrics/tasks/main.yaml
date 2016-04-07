@@ -1,11 +1,4 @@
 ---
-- name: Calling openshift_facts
-  roles:
-  - role: openshift_facts
-  tasks:
-  - openshift_facts:
-    role: hosted
-
 - name: Copy Configuration to temporary conf
   command: >
     cp {{ openshift.common.config_base }}/master/admin.kubeconfig {{hawkular_tmp_conf}}
