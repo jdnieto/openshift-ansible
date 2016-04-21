@@ -17,3 +17,4 @@ hawkular_persistence: "{% if openshift.hosted.metrics.storage.kind != None %}tru
 
 hawkular_type: "{{ 'origin' if deployment_type == 'origin' else 'enterprise' }}"
 
+hawkular_metric_duration: "{{ openshift.hosted.metrics.duration }}"

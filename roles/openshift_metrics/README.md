@@ -15,6 +15,7 @@ From this role:
 | Name                                            | Default value         |                                                             |
 |-------------------------------------------------|-----------------------|-------------------------------------------------------------|
 | openshift_hosted_metrics_deploy                 | False                 | If metrics should be deployed                               |
+| openshift_hosted_metrics_duration               | 7                     | How many days metrics should be stored for.
 | openshift_hosted_metrics_storage_nfs_directory  | /exports              | Root export directory.                                      |
 | openshift_hosted_metrics_storage_volume_name    | metrics               | Metrics volume within openshift_hosted_metrics_volume_dir   |
 | openshift_hosted_metrics_storage_volume_size    | 10Gi                  | Metrics volume size                                         |
