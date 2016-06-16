@@ -32,7 +32,7 @@ objects:
   apiVersion: v1
   kind: Pod
   metadata:
-    generateName: metrics-deployer-
+    name: metrics-deployer
   spec:
     containers:
     - image: ${IMAGE_PREFIX}metrics-deployer:${IMAGE_VERSION}
