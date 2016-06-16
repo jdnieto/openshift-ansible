@@ -1,6 +1,8 @@
 ---
 - include: evaluate_groups.yml
 
+- include: initialize_facts.yml
+
 - include: validate_hostnames.yml
 
 - name: Set oo_options
@@ -28,6 +30,8 @@
 - include: ../openshift-etcd/config.yml
 
 - include: ../openshift-nfs/config.yml
+
+- include: ../openshift-loadbalancer/config.yml
 
 - include: ../openshift-master/config.yml
 
